@@ -1,0 +1,7 @@
+name = "singbox2nekoray"
+main = "src/worker.js"
+workers_dev = true
+compatibility_date = "2025-06-09"
+
+[observability]
+enabled = true
