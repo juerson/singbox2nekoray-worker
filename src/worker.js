@@ -247,121 +247,134 @@ function safeParseHostPort(input) {
 
 const htmlContent = `<!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="UTF-8">
-  <title>Neko Links在线制作工具</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      padding: 2em;
-      display: flex;
-      justify-content: center;
-    }
-    .container {
-      display: flex;
-      gap: 2em;
-    }
+	<meta charset="UTF-8">
+	<title>Neko Links在线制作工具</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			padding: 2em;
+			display: flex;
+			justify-content: center;
+		}
+
+		.container {
+			display: flex;
+			gap: 2em;
+		}
+
 		.footer {
 			text-align: center;
 			margin-top: 15px;
 		}
-    .left-box {
-      width: 300px;
-    }
-    .right-box {
-      width: 700px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    textarea {
-      width: 100%;
-      height: 100%;
-      resize: none;
+
+		.left-box {
+			width: 300px;
+		}
+
+		.right-box {
+			width: 700px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
+		textarea {
+			width: 100%;
+			height: 100%;
+			resize: none;
 			padding: 0.5em;
-      box-sizing: border-box;
-    }
-    .input-area,
-    .output-area {
-      height: 45%;
-    }
-    .buttons {
-		  text-align: center;
-      margin: 1em 0;
-    }
-    button {
-      margin-right: 1em;
-      padding: 0.5em 1em;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 1em;
-    }
-  </style>
+			box-sizing: border-box;
+		}
+
+		.input-area,
+		.output-area {
+			height: 45%;
+		}
+
+		.buttons {
+			text-align: center;
+			margin: 1em 0;
+		}
+
+		button {
+			margin-right: 1em;
+			padding: 0.5em 1em;
+		}
+
+		h2 {
+			text-align: center;
+			margin-bottom: 1em;
+		}
+	</style>
 </head>
+
 <body>
 
 	<div id="box">
-    <h2>Singbox配置转换为Neko Links</h2>
-    <div class="container" style="height: 600px;">
-      <div class="left-box">
-        <textarea id="leftInput" placeholder="(可选)这里输入CF IP、反代IP和反代域名\n格式：\n  domain\n  domain:port\n  [ipv6]:port\n  ipv4:port\n  ip(ipv4/ipv6)\n  ip,port,字段3,字段4..(cvs数据)\n  ipv4:port,字段2,字段3..(csv数据)\n  [ipv6]:port,字段2,字段3..(csv数据)"></textarea>
-      </div>
-      <div class="right-box">
-        <div class="input-area">
-          <textarea id="input" placeholder="粘贴 Singbox JSON 配置数据"></textarea>
-        </div>
-        <div class="buttons">
-          <button id="convertBtn">转换为Neko Links</button>
-          <button id="copyBtn">复制生成的Neko Links</button>
-        </div>
-        <div class="output-area">
-          <textarea id="output" readonly placeholder="输出结果显示在这里"></textarea>
-        </div>
-      </div>
-    </div>
+		<h2>Singbox配置转换为Neko Links</h2>
+		<div class="container" style="height: 600px;">
+			<div class="left-box">
+				<textarea id="leftInput"
+					placeholder="(可选)这里输入CF IP、反代IP和反代域名\n格式：\n  domain\n  domain:port\n  [ipv6]:port\n  ipv4:port\n  ip(ipv4/ipv6)\n  ip,port,字段3,字段4..(cvs数据)\n  ipv4:port,字段2,字段3..(csv数据)\n  [ipv6]:port,字段2,字段3..(csv数据)"></textarea>
+			</div>
+			<div class="right-box">
+				<div class="input-area">
+					<textarea id="input" placeholder="粘贴 Singbox JSON 配置数据"></textarea>
+				</div>
+				<div class="buttons">
+					<button id="convertBtn">转换为Neko Links</button>
+					<button id="copyBtn">复制生成的Neko Links</button>
+				</div>
+				<div class="output-area">
+					<textarea id="output" readonly placeholder="输出结果显示在这里"></textarea>
+				</div>
+			</div>
+		</div>
 		<div class="footer">
-		  NekoBox工具：
+			NekoBox工具：
 			<a href="https://github.com/MatsuriDayo/nekoray" target="_blank">@MatsuriDayo</a>（存档版本）
 			<a href="https://github.com/Mahdi-zarei/nekoray" target="_blank">@Mahdi-zarei</a>（v4.2.7之后的版本不支持外部核心，只支持singbox内核）
 		</div>
-  </div>
+	</div>
 
 
-  <script>
-    document.getElementById('convertBtn').addEventListener('click', async () => {
-      const leftVal = document.getElementById('leftInput').value.trim();
-      const rightVal = document.getElementById('input').value.trim();
+	<script>
+		document.getElementById('convertBtn').addEventListener('click', async () => {
+			const leftVal = document.getElementById('leftInput').value.trim();
+			const rightVal = document.getElementById('input').value.trim();
 
-      if (!rightVal) {
-        alert('Singbox JSON 配置数据不能为空');
-        return;
-      }
+			if (!rightVal) {
+				alert('Singbox JSON 配置数据不能为空');
+				return;
+			}
 
-      // 构造请求体：如果 leftVal 不空，就一起发；否则只发 right
-      const payload = leftVal
-        ? { left: leftVal, right: rightVal }
-        : { right: rightVal };
+			// 构造请求体：如果 leftVal 不空，就一起发；否则只发 right
+			const payload = leftVal
+				? { left: leftVal, right: rightVal }
+				: { right: rightVal };
 
-      try {
-        const response = await fetch('/convert', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        if (!response.ok) throw new Error('转换失败');
-        const result = await response.text();
-        document.getElementById('output').value = result;
-      } catch (err) {
-        alert(err.message);
-      }
-    });
+			try {
+				const response = await fetch('/convert', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(payload)
+				});
+				if (!response.ok) throw new Error('转换失败');
+				const result = await response.text();
+				document.getElementById('output').value = result;
+			} catch (err) {
+				alert(err.message);
+			}
+		});
 
-    document.getElementById('copyBtn').addEventListener('click', () => {
-      const output = document.getElementById('output');
-      output.select();
-      document.execCommand('copy');
-    });
-  </script>
+		document.getElementById('copyBtn').addEventListener('click', () => {
+			const output = document.getElementById('output');
+			output.select();
+			document.execCommand('copy');
+		});
+	</script>
 </body>
+
 </html>`;

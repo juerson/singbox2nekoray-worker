@@ -209,65 +209,77 @@ function safeParseHostPort(input2) {
 __name(safeParseHostPort, "safeParseHostPort");
 var htmlContent = `<!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="UTF-8">
-  <title>Neko Links\u5728\u7EBF\u5236\u4F5C\u5DE5\u5177</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      padding: 2em;
-      display: flex;
-      justify-content: center;
-    }
-    .container {
-      display: flex;
-      gap: 2em;
-    }
+	<meta charset="UTF-8">
+	<title>Neko Links\u5728\u7EBF\u5236\u4F5C\u5DE5\u5177</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			padding: 2em;
+			display: flex;
+			justify-content: center;
+		}
+
+		.container {
+			display: flex;
+			gap: 2em;
+		}
+
 		.footer {
 			text-align: center;
 			margin-top: 15px;
 		}
-    .left-box {
-      width: 300px;
-    }
-    .right-box {
-      width: 700px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    textarea {
-      width: 100%;
-      height: 100%;
-      resize: none;
+
+		.left-box {
+			width: 300px;
+		}
+
+		.right-box {
+			width: 700px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
+		textarea {
+			width: 100%;
+			height: 100%;
+			resize: none;
 			padding: 0.5em;
-      box-sizing: border-box;
-    }
-    .input-area,
-    .output-area {
-      height: 45%;
-    }
-    .buttons {
-		  text-align: center;
-      margin: 1em 0;
-    }
-    button {
-      margin-right: 1em;
-      padding: 0.5em 1em;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 1em;
-    }
-  </style>
+			box-sizing: border-box;
+		}
+
+		.input-area,
+		.output-area {
+			height: 45%;
+		}
+
+		.buttons {
+			text-align: center;
+			margin: 1em 0;
+		}
+
+		button {
+			margin-right: 1em;
+			padding: 0.5em 1em;
+		}
+
+		h2 {
+			text-align: center;
+			margin-bottom: 1em;
+		}
+	</style>
 </head>
+
 <body>
 
 	<div id="box">
-    <h2>Singbox\u914D\u7F6E\u8F6C\u6362\u4E3ANeko Links</h2>
-    <div class="container" style="height: 600px;">
-      <div class="left-box">
-        <textarea id="leftInput" placeholder="(\u53EF\u9009)\u8FD9\u91CC\u8F93\u5165CF IP\u3001\u53CD\u4EE3IP\u548C\u53CD\u4EE3\u57DF\u540D
+		<h2>Singbox\u914D\u7F6E\u8F6C\u6362\u4E3ANeko Links</h2>
+		<div class="container" style="height: 600px;">
+			<div class="left-box">
+				<textarea id="leftInput"
+					placeholder="(\u53EF\u9009)\u8FD9\u91CC\u8F93\u5165CF IP\u3001\u53CD\u4EE3IP\u548C\u53CD\u4EE3\u57DF\u540D
 \u683C\u5F0F\uFF1A
   domain
   domain:port
@@ -277,64 +289,65 @@ var htmlContent = `<!DOCTYPE html>
   ip,port,\u5B57\u6BB53,\u5B57\u6BB54..(cvs\u6570\u636E)
   ipv4:port,\u5B57\u6BB52,\u5B57\u6BB53..(csv\u6570\u636E)
   [ipv6]:port,\u5B57\u6BB52,\u5B57\u6BB53..(csv\u6570\u636E)"></textarea>
-      </div>
-      <div class="right-box">
-        <div class="input-area">
-          <textarea id="input" placeholder="\u7C98\u8D34 Singbox JSON \u914D\u7F6E\u6570\u636E"></textarea>
-        </div>
-        <div class="buttons">
-          <button id="convertBtn">\u8F6C\u6362\u4E3ANeko Links</button>
-          <button id="copyBtn">\u590D\u5236\u751F\u6210\u7684Neko Links</button>
-        </div>
-        <div class="output-area">
-          <textarea id="output" readonly placeholder="\u8F93\u51FA\u7ED3\u679C\u663E\u793A\u5728\u8FD9\u91CC"></textarea>
-        </div>
-      </div>
-    </div>
+			</div>
+			<div class="right-box">
+				<div class="input-area">
+					<textarea id="input" placeholder="\u7C98\u8D34 Singbox JSON \u914D\u7F6E\u6570\u636E"></textarea>
+				</div>
+				<div class="buttons">
+					<button id="convertBtn">\u8F6C\u6362\u4E3ANeko Links</button>
+					<button id="copyBtn">\u590D\u5236\u751F\u6210\u7684Neko Links</button>
+				</div>
+				<div class="output-area">
+					<textarea id="output" readonly placeholder="\u8F93\u51FA\u7ED3\u679C\u663E\u793A\u5728\u8FD9\u91CC"></textarea>
+				</div>
+			</div>
+		</div>
 		<div class="footer">
-		  NekoBox\u5DE5\u5177\uFF1A
+			NekoBox\u5DE5\u5177\uFF1A
 			<a href="https://github.com/MatsuriDayo/nekoray" target="_blank">@MatsuriDayo</a>\uFF08\u5B58\u6863\u7248\u672C\uFF09
 			<a href="https://github.com/Mahdi-zarei/nekoray" target="_blank">@Mahdi-zarei</a>\uFF08v4.2.7\u4E4B\u540E\u7684\u7248\u672C\u4E0D\u652F\u6301\u5916\u90E8\u6838\u5FC3\uFF0C\u53EA\u652F\u6301singbox\u5185\u6838\uFF09
 		</div>
-  </div>
+	</div>
 
 
-  <script>
-    document.getElementById('convertBtn').addEventListener('click', async () => {
-      const leftVal = document.getElementById('leftInput').value.trim();
-      const rightVal = document.getElementById('input').value.trim();
+	<script>
+		document.getElementById('convertBtn').addEventListener('click', async () => {
+			const leftVal = document.getElementById('leftInput').value.trim();
+			const rightVal = document.getElementById('input').value.trim();
 
-      if (!rightVal) {
-        alert('Singbox JSON \u914D\u7F6E\u6570\u636E\u4E0D\u80FD\u4E3A\u7A7A');
-        return;
-      }
+			if (!rightVal) {
+				alert('Singbox JSON \u914D\u7F6E\u6570\u636E\u4E0D\u80FD\u4E3A\u7A7A');
+				return;
+			}
 
-      // \u6784\u9020\u8BF7\u6C42\u4F53\uFF1A\u5982\u679C leftVal \u4E0D\u7A7A\uFF0C\u5C31\u4E00\u8D77\u53D1\uFF1B\u5426\u5219\u53EA\u53D1 right
-      const payload = leftVal
-        ? { left: leftVal, right: rightVal }
-        : { right: rightVal };
+			// \u6784\u9020\u8BF7\u6C42\u4F53\uFF1A\u5982\u679C leftVal \u4E0D\u7A7A\uFF0C\u5C31\u4E00\u8D77\u53D1\uFF1B\u5426\u5219\u53EA\u53D1 right
+			const payload = leftVal
+				? { left: leftVal, right: rightVal }
+				: { right: rightVal };
 
-      try {
-        const response = await fetch('/convert', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        if (!response.ok) throw new Error('\u8F6C\u6362\u5931\u8D25');
-        const result = await response.text();
-        document.getElementById('output').value = result;
-      } catch (err) {
-        alert(err.message);
-      }
-    });
+			try {
+				const response = await fetch('/convert', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(payload)
+				});
+				if (!response.ok) throw new Error('\u8F6C\u6362\u5931\u8D25');
+				const result = await response.text();
+				document.getElementById('output').value = result;
+			} catch (err) {
+				alert(err.message);
+			}
+		});
 
-    document.getElementById('copyBtn').addEventListener('click', () => {
-      const output = document.getElementById('output');
-      output.select();
-      document.execCommand('copy');
-    });
-  <\/script>
+		document.getElementById('copyBtn').addEventListener('click', () => {
+			const output = document.getElementById('output');
+			output.select();
+			document.execCommand('copy');
+		});
+	<\/script>
 </body>
+
 </html>`;
 export {
   worker_default as default
